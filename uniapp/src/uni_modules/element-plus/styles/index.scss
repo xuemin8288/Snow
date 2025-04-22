@@ -1,0 +1,192 @@
+// Element Plus小程序适配样式
+
+// 颜色变量
+$el-color-primary: #64b3f4;
+$el-color-primary-light-3: #82c1f7;
+$el-color-primary-light-5: #9fd0f9;
+$el-color-primary-light-7: #bce0fb;
+$el-color-primary-light-9: #ecf6fe;
+$el-color-primary-dark-2: #4f8fc3;
+
+// 边框圆角
+$el-border-radius-base: 4px;
+$el-border-radius-small: 2px;
+$el-border-radius-round: 20px;
+$el-border-radius-circle: 100%;
+
+// 全局CSS变量
+:root {
+  --el-color-primary: #{$el-color-primary};
+  --el-color-primary-light-3: #{$el-color-primary-light-3};
+  --el-color-primary-light-5: #{$el-color-primary-light-5};
+  --el-color-primary-light-7: #{$el-color-primary-light-7};
+  --el-color-primary-light-9: #{$el-color-primary-light-9};
+  --el-color-primary-dark-2: #{$el-color-primary-dark-2};
+  
+  --el-border-radius-base: #{$el-border-radius-base};
+  --el-border-radius-small: #{$el-border-radius-small};
+  --el-border-radius-round: #{$el-border-radius-round};
+  --el-border-radius-circle: #{$el-border-radius-circle};
+}
+
+// 按钮样式
+.el-button {
+  box-sizing: border-box;
+  line-height: 1;
+  padding: 0;
+  
+  &.is-round {
+    border-radius: var(--el-border-radius-round);
+  }
+  
+  &--primary {
+    background: var(--el-color-primary);
+    color: #ffffff;
+    
+    &:active {
+      background: var(--el-color-primary-dark-2);
+    }
+  }
+  
+  &--large {
+    height: 90rpx;
+    font-size: 32rpx;
+    font-weight: 500;
+  }
+}
+
+// 输入框样式
+.el-input {
+  width: 100%;
+  box-sizing: border-box;
+  
+  &__inner {
+    width: 100%;
+    height: 70rpx;
+    box-sizing: border-box;
+    outline: none;
+    border: 1px solid #dcdfe6;
+    border-radius: 8rpx;
+    padding: 0 30rpx;
+    color: #333;
+    font-size: 28rpx;
+  }
+}
+
+// 表单项样式
+.el-form-item {
+  margin-bottom: 25rpx;
+  display: flex;
+  
+  &__label {
+    width: 150rpx;
+    text-align: right;
+    padding-right: 20rpx;
+    color: #333;
+    font-size: 28rpx;
+    line-height: 70rpx;
+  }
+  
+  &__content {
+    flex: 1;
+    line-height: 70rpx;
+  }
+}
+
+// 下拉选择框样式
+.el-select {
+  width: 100%;
+  
+  &__inner {
+    height: 70rpx;
+    line-height: 70rpx;
+    background-color: #f5f5f5;
+    border-radius: 8rpx;
+    padding: 0 30rpx;
+    color: #333;
+    font-size: 28rpx;
+    border: 1px solid #e0e0e0;
+    position: relative;
+    
+    &::after {
+      content: "";
+      position: absolute;
+      right: 20rpx;
+      top: 50%;
+      transform: translateY(-50%);
+      border-width: 8rpx;
+      border-style: solid;
+      border-color: #999 transparent transparent transparent;
+    }
+  }
+}
+
+// 卡片样式
+.el-card {
+  border-radius: 12rpx;
+  border: 1px solid #ebeef5;
+  background-color: #fff;
+  overflow: hidden;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.08);
+  
+  &__header {
+    padding: 30rpx;
+    border-bottom: 1px solid #ebeef5;
+  }
+  
+  &__body {
+    padding: 30rpx;
+  }
+}
+
+// 链接样式
+.el-link {
+  text-decoration: none;
+  
+  &--primary {
+    color: var(--el-color-primary);
+    cursor: pointer;
+    
+    &:hover {
+      color: var(--el-color-primary-light-3);
+    }
+  }
+}
+
+// 标签样式
+.el-tag {
+  font-size: 22rpx;
+  padding: 2rpx 12rpx;
+  background-color: var(--el-color-primary-light-9);
+  color: var(--el-color-primary);
+  border-radius: 4rpx;
+  margin-right: 10rpx;
+  display: inline-block;
+}
+
+// 菜单样式
+.el-menu {
+  &-item {
+    color: #303133;
+    transition: color 0.3s;
+    
+    &:hover {
+      color: var(--el-color-primary);
+    }
+  }
+}
+
+// 空状态
+.el-empty {
+  width: 100%;
+  padding: 40rpx 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  
+  .coming-soon {
+    font-size: 32rpx;
+    color: #909399;
+  }
+} 

@@ -1,0 +1,139 @@
+{
+	"pages": [
+		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": "登录",
+				"navigationBarBackgroundColor": "#64b3f4",
+				"navigationBarTextStyle": "white"
+			}
+		},
+		{
+			"path": "pages/login/login",
+			"style": {
+				"navigationBarTitleText": "注册",
+				"navigationBarBackgroundColor": "#64b3f4",
+				"navigationBarTextStyle": "white"
+			}
+		},
+		{
+			"path": "pages/layout/layout",
+			"style": {
+				"navigationBarTitleText": "高血压义诊系统",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/article/detail",
+			"style": {
+				"navigationBarTitleText": "文章详情",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/test/test",
+			"style": {
+				"navigationBarTitleText": "问诊单",
+				"navigationBarBackgroundColor": "#64b3f4",
+				"navigationBarTextStyle": "white"
+			}
+		},
+		{
+			"path": "pages/test/detail",
+			"style": {
+				"navigationBarTitleText": "测评详情"
+			}
+		},
+		{
+			"path": "pages/test/result",
+			"style": {
+				"navigationBarTitleText": "测评结果"
+			}
+		},
+		{
+			"path": "pages/consult/consult",
+			"style": {
+				"navigationBarTitleText": "咨询",
+				"navigationBarBackgroundColor": "#64b3f4",
+				"navigationBarTextStyle": "white"
+			}
+		},
+		{
+			"path": "pages/feedback/feedback",
+			"style": {
+				"navigationBarTitleText": "反馈与建议",
+				"navigationBarBackgroundColor": "#64b3f4",
+				"navigationBarTextStyle": "white"
+			}
+		},
+		{
+			"path": "pages/user/user",
+			"style": {
+				"navigationBarTitleText": "个人中心",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/user/consultation",
+			"style": {
+				"navigationBarTitleText": "问诊记录",
+				"navigationBarBackgroundColor": "#64b3f4",
+				"navigationBarTextStyle": "white"
+			}
+		},
+		{
+			"path": "pages/user/feedback",
+			"style": {
+				"navigationBarTitleText": "我的反馈",
+				"navigationBarBackgroundColor": "#64b3f4",
+				"navigationBarTextStyle": "white"
+			}
+		},
+		{
+			"path": "pages/user/password",
+			"style": {
+				"navigationBarTitleText": "修改密码",
+				"navigationBarBackgroundColor": "#64b3f4",
+				"navigationBarTextStyle": "white"
+			}
+		},
+		{
+			"path": "pages/user/testRecord",
+			"style": {
+				"navigationBarTitleText": "测试记录",
+				"navigationBarBackgroundColor": "#64b3f4",
+				"navigationBarTextStyle": "white"
+			}
+		}
+	],
+	"globalStyle": {
+		"navigationBarTextStyle": "white",
+		"navigationBarTitleText": "高血压义诊系统",
+		"navigationBarBackgroundColor": "#64b3f4",
+		"backgroundColor": "#f8f8f8"
+	},
+	"tabBar": {
+		"color": "#7A7E83",
+		"selectedColor": "#64b3f4",
+		"borderStyle": "black",
+		"backgroundColor": "#ffffff",
+		"list": [
+			{
+				"pagePath": "pages/layout/layout",
+				"text": "首页"
+			},
+			{
+				"pagePath": "pages/test/test",
+				"text": "测评"
+			},
+			{
+				"pagePath": "pages/consult/consult",
+				"text": "咨询"
+			},
+			{
+				"pagePath": "pages/user/user",
+				"text": "我的"
+			}
+		]
+	}
+}
