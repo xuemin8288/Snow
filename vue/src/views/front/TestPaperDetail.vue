@@ -12,7 +12,7 @@
             <el-radio :value="item.aName">A. {{ item.aName }}</el-radio>
             <el-radio :value="item.bName">B. {{ item.bName }}</el-radio>
             <el-radio :value="item.cName">C. {{ item.cName }}</el-radio>
-            <el-radio :value="item.dName">C. {{ item.dName }}</el-radio>
+            <el-radio :value="item.dName">D. {{ item.dName }}</el-radio>
           </el-radio-group>
         </div>
       </div>

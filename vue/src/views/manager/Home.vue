@@ -56,12 +56,22 @@
 
 
     <!-- TESTING -->
-    <div style="display: flex; margin-top: 10px">
-      <div class="card" style="flex: 2; height: 400px; margin-right: 5px" id="pie2"></div>
-      <div class="card" style="flex: 2; height: 400px; margin-right: 5px" id="pie3"></div>
-      <div class="card" style="flex: 2; height: 400px; margin-right: 5px" id="pie4"></div>
-      <div class="card" style="flex: 2; height: 400px; margin-right: 5px" id="pie5"></div>
-      <div class="card" style="flex: 2; height: 400px; margin-right: 5px" id="pie6"></div>
+    <div style="margin-top: 10px">
+      <div class="card" style="margin-bottom: 15px; padding: 10px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+          <h2 style="margin: 0;">疾病证型地区分布统计</h2>
+          <el-button type="primary" size="small" @click="refreshData" :loading="refreshLoading">
+            <i class="el-icon-refresh"></i> 刷新数据
+          </el-button>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; justify-content: space-around;">
+          <div style="width: 48%; height: 350px; margin-bottom: 15px;" id="pie2"></div>
+          <div style="width: 48%; height: 350px; margin-bottom: 15px;" id="pie3"></div>
+          <div style="width: 48%; height: 350px; margin-bottom: 15px;" id="pie4"></div>
+          <div style="width: 48%; height: 350px; margin-bottom: 15px;" id="pie5"></div>
+          <div style="width: 48%; height: 350px; margin-bottom: 15px;" id="pie6"></div>
+        </div>
+      </div>
     </div>
     <!-- TESTING -->
   </div>
@@ -71,7 +81,7 @@
 
 <script setup>
 
-import {reactive, onMounted} from "vue";
+import {reactive, ref, onMounted, onUnmounted} from "vue";
 import request from "@/utils/request.js";
 import {ElMessage} from "element-plus";
 import * as echarts from "echarts";
@@ -79,6 +89,9 @@ import * as echarts from "echarts";
 const data = reactive({
   baseData: {}
 })
+
+// 添加刷新按钮的loading状态
+const refreshLoading = ref(false);
 
 const loadBaseData = () => {
   request.get('/statistics/base').then(res => {
@@ -132,21 +145,64 @@ const loadPie = () => {
 
 // 五个饼图
 let fetchedData = null;
-function fetchData() {
-  if (fetchedData) {
+function fetchData(forceRefresh = false) {
+  // 如果强制刷新或缓存为空，则重新获取数据
+  if (forceRefresh || !fetchedData) {
+    console.log("从服务器获取最新数据");
+    return request.get('/typeaddmap/all').then(res => {
+      if (res.code === '200') {
+        fetchedData = res.data;
+        return fetchedData;
+      } else {
+        ElMessage.error(res.msg);
+        return [];
+      }
+    }).catch(error => {
+      console.error('Error fetching data:', error);
+      return [];
+    });
+  } else {
+    console.log("使用缓存数据");
     return Promise.resolve(fetchedData);
   }
-  return request.get('/typeaddmap/all').then(res => {
+}
+
+// 添加刷新数据的方法
+function refreshData() {
+  console.log("刷新数据");
+  // 设置loading状态
+  refreshLoading.value = true;
+  
+  // 调用重置并重新计算统计接口
+  ElMessage.info('正在重置并重新计算统计数据...');
+  
+  request.get('/typeaddmap/resetAndRecount').then(res => {
     if (res.code === '200') {
-      fetchedData = res.data;
-      return fetchedData;
+      ElMessage.success('统计数据已重置并重新计算');
+      console.log("统计数据已重置并重新计算");
+      
+      // 清除缓存
+      fetchedData = null;
+      
+      // 刷新所有饼图
+      return fetchData(true).then(() => {
+        loadPie2();
+        loadPie3();
+        loadPie4();
+        loadPie5();
+        loadPie6();
+        console.log("所有饼图已刷新");
+      });
     } else {
-      ElMessage.error(res.msg);
-      return [];
+      ElMessage.error('操作失败: ' + res.msg);
+      console.error("操作失败:", res.msg);
     }
   }).catch(error => {
-    console.error('Error fetching data:', error);
-    return [];
+    ElMessage.error('请求出错: ' + error);
+    console.error("请求出错:", error);
+  }).finally(() => {
+    // 无论成功失败，都取消loading状态
+    refreshLoading.value = false;
   });
 }
 
@@ -157,35 +213,91 @@ function filterDataByTypeKey(data, typekey) {
   }));
 }
 
+// 保存图表实例以便后续清理
+const chartInstances = [];
+
 function loadPieChart(domId, titleText, typekey) {
   fetchData().then(data => {
     let chartDom = document.getElementById(domId);
     let myChart = echarts.init(chartDom);
+    // 保存图表实例
+    chartInstances.push(myChart);
+    
     let pieOptions = {
       title: {
         text: titleText,
         subtext: '统计维度：地区',
-        right: '10%'
+        left: 'center',
+        top: 10,
+        textStyle: {
+          fontSize: 16,
+          fontWeight: 'bold'
+        },
+        subtextStyle: {
+          fontSize: 12
+        }
       },
       tooltip: {
         trigger: 'item',
-        formatter: '{a} <br/>{b} : {c} ({d}%)'
+        formatter: '{a} <br/>{b} : {c} ({d}%)',
+        backgroundColor: 'rgba(255, 255, 255, 0.8)',
+        borderColor: '#ccc',
+        borderWidth: 1,
+        textStyle: {
+          color: '#333'
+        }
       },
       legend: {
-        orient: 'vertical',
-        left: 'left'
+        type: 'scroll',
+        orient: 'horizontal',
+        bottom: 10,
+        left: 'center',
+        itemWidth: 15,
+        itemHeight: 10,
+        textStyle: {
+          fontSize: 12
+        }
       },
+      color: ['#5470c6', '#91cc75', '#fac858', '#ee6666', '#73c0de', '#3ba272', '#fc8452', '#9a60b4', '#ea7ccc'],
       series: [
         {
           name: '数量占比',
           type: 'pie',
-          radius: '50%',
-          center: ['50%', '60%'],
+          radius: ['35%', '60%'],  // 内外半径，形成环形图
+          center: ['50%', '50%'],
+          avoidLabelOverlap: true,
+          itemStyle: {
+            borderRadius: 4,
+            borderColor: '#fff',
+            borderWidth: 2
+          },
+          label: {
+            show: true,
+            formatter: '{b}: {c} ({d}%)',
+            fontSize: 12
+          },
+          labelLine: {
+            show: true,
+            length: 15,
+            length2: 10
+          },
+          emphasis: {
+            itemStyle: {
+              shadowBlur: 10,
+              shadowOffsetX: 0,
+              shadowColor: 'rgba(0, 0, 0, 0.5)'
+            }
+          },
           data: filterDataByTypeKey(data, typekey)
         }
       ]
     };
     myChart.setOption(pieOptions);
+    
+    // 添加响应式调整
+    window.addEventListener('resize', function() {
+      myChart.resize();
+    });
   });
 }
 const loadPie2 = () => {
@@ -208,15 +320,45 @@ const loadPie6 = () => {
 
 
 loadBaseData()
+
+// 声明一个变量来存储定时器ID
+let refreshInterval = null;
+
 onMounted(() => {
   loadLine()
   loadBar()
   loadPie()
-  loadPie2()
-  loadPie3()
-  loadPie4()
-  loadPie5()
-  loadPie6()
+  
+  // 使用强制刷新加载饼图
+  fetchData(true).then(() => {
+    loadPie2()
+    loadPie3()
+    loadPie4()
+    loadPie5()
+    loadPie6()
+  })
+  
+  // 每30秒自动刷新一次数据
+  refreshInterval = setInterval(() => {
+    console.log("定时刷新数据");
+    refreshData();
+  }, 30000);
+})
+
+// 组件卸载时清理
+onUnmounted(() => {
+  // 移除所有事件监听器
+  window.removeEventListener('resize', () => {});
+  
+  // 清除定时器
+  if (refreshInterval) {
+    clearInterval(refreshInterval);
+  }
+  
+  // 销毁所有图表实例
+  chartInstances.forEach(chart => {
+    chart.dispose();
+  });
 })
 
 

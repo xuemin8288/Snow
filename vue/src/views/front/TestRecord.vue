@@ -60,44 +60,21 @@ const data = reactive({
 //   })
 // }
 const load = () => {
-  const testRecordRequest = request.get('/testRecord/selectPage', {
+  request.get('/testRecord/selectPage', {
     params: {
       pageNum: data.pageNum,
       pageSize: data.pageSize,
       testPaperName: data.testPaperName
     }
-  });
-
-  const typeAddMapRequest = request.get('http://localhost:9090/typeaddmap/selectPage', {
-    params: {
-      // 根据实际情况添加该请求所需的参数
-      pageNum: data.pageNum,
-      pageSize: data.pageSize
+  }).then(res => {
+    if (res.code === '200') {
+      data.tableData = res.data.list
+      data.total = res.data.total
+    } else {
+      ElMessage.error(res.msg)
     }
-  });
-
-  Promise.all([testRecordRequest, typeAddMapRequest])
-      .then(([testRecordRes, typeAddMapRes]) => {
-        if (testRecordRes.code === '200') {
-          data.tableData = testRecordRes.data.list;
-          data.total = testRecordRes.data.total;
-        } else {
-          ElMessage.error(testRecordRes.msg);
-        }
-
-        if (typeAddMapRes.code === '200') {
-          typeAddMapData.tableData = typeAddMapRes.data.list;
-          typeAddMapData.total = typeAddMapRes.data.total;
-        } else {
-          ElMessage.error(typeAddMapRes.msg);
-        }
-      })
-      .catch(error => {
-        // console.error('请求出错:', error);
-        // ElMessage.error('请求出错，请稍后重试');
-      });
+  })
 }
-
 
 const del = (id) => {
   ElMessageBox.confirm('删除后数据无法恢复，您确定删除吗？', '删除确认', { type: 'warning' }).then(res => {
