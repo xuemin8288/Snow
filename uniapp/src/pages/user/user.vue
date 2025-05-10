@@ -256,7 +256,7 @@ export default {
         },
         {
           type: 'appointment',
-          title: '预约专家',
+          title: '咨询专家',
           description: '预约了张华医生的咨询',
           time: '2023-07-08 09:15'
         }

@@ -15,7 +15,7 @@
           <text>填写问诊单</text>
         </view>
         <view class="el-menu-item menu-item" @click="sidebarClick('consult')">
-          <text>预约专家</text>
+          <text>咨询专家</text>
         </view>
         <view class="el-menu-item menu-item" @click="sidebarClick('feedback')">
           <text>反馈和建议</text>
@@ -92,14 +92,14 @@
       </view>
       
       <view v-else-if="currentPage === 'assessment'" class="page-content">
-        <text class="page-title">心理测评</text>
+        <text class="page-title">高血压测评</text>
         <view class="el-empty">
           <text class="coming-soon">测评功能开发中...</text>
         </view>
       </view>
       
       <view v-else-if="currentPage === 'consult'" class="page-content">
-        <text class="page-title">心理咨询</text>
+        <text class="page-title">高血压咨询</text>
         <view class="el-empty">
           <text class="coming-soon">咨询功能开发中...</text>
         </view>

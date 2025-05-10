@@ -143,7 +143,7 @@ export default {
       switch(this.testData.type) {
         case 'SAS': // 焦虑自测量表
           if (level.includes('正常')) {
-            return '您的焦虑水平处于正常范围，心理状态良好，能够有效应对日常压力。';
+            return '您的焦虑水平处于正常范围，高血压状态良好，能够有效应对日常压力。';
           } else if (level.includes('轻度')) {
             return '您出现了轻度焦虑症状，可能会偶尔感到紧张和担忧，但这些症状通常不会显著影响日常生活。';
           } else if (level.includes('中度')) {
@@ -154,11 +154,11 @@ export default {
           
         case 'SDS': // 抑郁自测量表
           if (level.includes('正常')) {
-            return '您的抑郁指数在正常范围内，心理状态健康，能够保持积极的情绪和正常的社会功能。';
+            return '您的抑郁指数在正常范围内，高血压状态健康，能够保持积极的情绪和正常的社会功能。';
           } else if (level.includes('轻度')) {
             return '您表现出轻度抑郁症状，可能会偶尔感到情绪低落，但不会严重影响生活和工作。';
           } else if (level.includes('中度')) {
-            return '您的抑郁症状达到中度水平，可能会经常感到悲伤、失落，兴趣减低，精力下降，建议寻求专业心理咨询。';
+            return '您的抑郁症状达到中度水平，可能会经常感到悲伤、失落，兴趣减低，精力下降，建议寻求专业高血压咨询。';
           } else {
             return '您的抑郁症状已达到严重程度，可能会持续感到绝望、无助，并可能伴有自伤想法，强烈建议立即就医。';
           }
@@ -176,7 +176,7 @@ export default {
           
         case 'PSS': // 压力知觉量表
           if (level.includes('较小')) {
-            return '您的压力水平较低，能够有效应对生活中的挑战，维持良好的心理平衡。';
+            return '您的压力水平较低，能够有效应对生活中的挑战，维持良好的高血压平衡。';
           } else if (level.includes('中等')) {
             return '您的压力处于中等水平，这是常见的状态，适度的压力可以提高效率，但需要注意自我调节。';
           } else {
@@ -184,7 +184,7 @@ export default {
           }
           
         default:
-          return '根据您的测评结果，建议您关注自己的心理健康状况，保持良好的生活习惯和积极的心态。';
+          return '根据您的测评结果，建议您关注自己的高血压健康状况，保持良好的生活习惯和积极的心态。';
       }
     },
     
@@ -203,14 +203,14 @@ export default {
         }
       }
       
-      // 保留原有心理测评的建议
+      // 保留原有高血压测评的建议
       const level = this.resultLevel;
       if (level.includes('正常') || level.includes('良好') || level.includes('较小')) {
-        return '建议您继续保持当前的良好状态，定期进行自我评估，培养健康的生活方式和积极的心态。适当的运动、充足的睡眠和良好的社交关系都有助于维持心理健康。';
+        return '建议您继续保持当前的良好状态，定期进行自我评估，培养健康的生活方式和积极的心态。适当的运动、充足的睡眠和良好的社交关系都有助于维持高血压健康。';
       } else if (level.includes('轻度') || level.includes('一般') || level.includes('中等')) {
-        return '建议您关注自己的心理状态变化，学习简单的自我调适技巧，如深呼吸、放松训练、正念冥想等。保持规律的生活作息，增加体育锻炼，适当寻求亲友的支持和理解。如症状持续或加重，可考虑寻求专业心理咨询。';
+        return '建议您关注自己的高血压状态变化，学习简单的自我调适技巧，如深呼吸、放松训练、正念冥想等。保持规律的生活作息，增加体育锻炼，适当寻求亲友的支持和理解。如症状持续或加重，可考虑寻求专业高血压咨询。';
       } else {
-        return '强烈建议您寻求专业的心理咨询或医疗帮助。通过我们平台可预约专业心理医生进行在线咨询。同时，建立健康的生活习惯，避免过度焦虑和压力，寻求家人和朋友的支持。请记住，及时寻求帮助是勇敢和负责任的表现。';
+        return '强烈建议您寻求专业的高血压咨询或医疗帮助。通过我们平台可预约专业高血压医生进行在线咨询。同时，建立健康的生活习惯，避免过度焦虑和压力，寻求家人和朋友的支持。请记住，及时寻求帮助是勇敢和负责任的表现。';
       }
     }
   },
@@ -285,7 +285,7 @@ export default {
                   
                   // 使用测评详情中的范围和答案数据
                   this.testData = {
-                    title: backendData.typeName || backendData.title || paperData.title || '心理测评结果',
+                    title: backendData.typeName || backendData.title || paperData.title || '高血压测评结果',
                     type: 'ChineseMedicine',
                     aRange: paperData.aRange,
                     bRange: paperData.bRange,
@@ -305,7 +305,7 @@ export default {
                 } else {
                   console.log('获取测评详情失败，使用简化数据');
                   this.testData = {
-                    title: backendData.typeName || backendData.title || '心理测评结果',
+                    title: backendData.typeName || backendData.title || '高血压测评结果',
                     type: 'ChineseMedicine'
                   };
                   
@@ -320,7 +320,7 @@ export default {
               .catch(paperErr => {
                 console.error('获取测评详情失败:', paperErr);
                 this.testData = {
-                  title: backendData.typeName || backendData.title || '心理测评结果',
+                  title: backendData.typeName || backendData.title || '高血压测评结果',
                   type: 'ChineseMedicine'
                 };
                 
@@ -420,7 +420,7 @@ export default {
           cAnswer: '可能存在瘀血内停型高血压的风险',
           analysis: '瘀血内停型高血压表现为头痛、胸闷、下肢浮肿、面色暗沉等症状。患者常感到疲劳、便秘、手脚麻木，舌质可能出现暗红或紫点。'
         },
-        // 保留原有的心理测评类型
+        // 保留原有的高血压测评类型
         1: {
           title: '焦虑自测量表 (SAS)',
           type: 'SAS'
@@ -445,7 +445,7 @@ export default {
       } else {
         // 默认使用第一个测试的数据
         this.testData = {
-          title: '心理健康测评',
+          title: '高血压健康测评',
           type: 'General'
         };
       }

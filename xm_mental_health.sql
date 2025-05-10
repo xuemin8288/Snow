@@ -260,8 +260,6 @@ INSERT INTO `test_record` VALUES (31, 11, 9, 4, 96, '可能存在瘀血内停型
 INSERT INTO `test_record` VALUES (32, 7, 10, 2, 89, '可能存在肝阳上亢型高血压的风险', '2025-04-23 11:30:12');
 INSERT INTO `test_record` VALUES (33, 8, 11, 2, 95, '可能存在肝肾阴虚型高血压的风险', '2025-04-23 11:32:45');
 INSERT INTO `test_record` VALUES (34, 9, 12, 1, 81, '可能存在阴阳两虚型高血压的风险', '2025-04-23 11:35:27');
-INSERT INTO `test_record` VALUES (35, 10, 13, 3, 87, '可能存在痰瘀内蕴型高血压的风险', '2025-04-23 11:38:19');
-INSERT INTO `test_record` VALUES (36, 11, 14, 4, 98, '可能存在瘀血内停型高血压的风险', '2025-04-23 11:40:56');
 
 -- ----------------------------
 -- Table structure for topic

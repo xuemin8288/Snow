@@ -21,7 +21,7 @@ export default {
     removeCollection: '/user/collection/remove'
   },
   
-  // 心理测评相关接口
+  // 高血压测评相关接口
   assessment: {
     // TestPaper相关接口
     getTestPaperList: '/testPaper/selectAll',

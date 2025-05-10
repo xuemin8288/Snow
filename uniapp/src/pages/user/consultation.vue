@@ -57,7 +57,7 @@
             
             <view class="info-row" v-if="item.status === '已结束' || item.status === '审核通过'">
               <text class="info-label">专家建议：</text>
-              <text class="info-value">{{ item.suggestion || "暂无建议" }}</text>
+              <text class="info-value">{{ item.reason || "暂无建议" }}</text>
             </view>
           </view>
           
@@ -146,7 +146,7 @@ export default {
           time: '60分钟',
           question: '最近睡眠质量不好，经常感到疲劳，请问可能是什么原因导致的？',
           status: '已结束',
-          suggestion: '建议保持规律作息，避免熬夜，睡前一小时不要使用电子设备，可以尝试喝一杯温牛奶帮助入睡。'
+          reason: '建议保持规律作息，避免熬夜，睡前一小时不要使用电子设备，可以尝试喝一杯温牛奶帮助入睡。'
         },
         {
           id: 2,
@@ -156,7 +156,7 @@ export default {
           time: '60分钟',
           question: '最近工作压力大，容易焦虑，有什么缓解方法吗？',
           status: '审核通过',
-          suggestion: '可以尝试冥想和深呼吸练习来缓解焦虑，每天抽出15-20分钟进行有氧运动也很有帮助。'
+          reason: '可以尝试冥想和深呼吸练习来缓解焦虑，每天抽出15-20分钟进行有氧运动也很有帮助。'
         },
         {
           id: 3,

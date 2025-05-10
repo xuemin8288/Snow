@@ -33,9 +33,12 @@
             <el-tag v-if="scope.row.status === '已结束'" type="primary">{{ scope.row.status }}</el-tag>
           </template>
         </el-table-column>
-                <el-table-column prop="reason" label="专家建议" show-overflow-tooltip/> <!-- 修改添加专家建议  -->
-
-        <el-table-column prop="reason" label="拒绝理由" show-overflow-tooltip/>
+        <el-table-column prop="reason" label="专家意见/拒绝理由" show-overflow-tooltip>
+          <template v-slot="scope">
+            <span v-if="scope.row.status === '审核通过'">{{ scope.row.reason }}</span>
+            <span v-if="scope.row.status === '审核拒绝'">{{ scope.row.reason }}</span>
+          </template>
+        </el-table-column>
         <el-table-column label="操作" width="100" fixed="right">
           <template v-slot="scope">
             <el-button type="primary" circle :icon="Edit" @click="handleEdit(scope.row)" v-if="data.user.role === 'DOCTOR'" :disabled="scope.row.status === '审核拒绝' || scope.row.status === '已结束'"></el-button>
@@ -60,6 +63,9 @@
         </el-form-item>
         <el-form-item prop="reason" label="拒绝理由" v-if="data.form.status === '审核拒绝'">
           <el-input type="textarea" :rows="4" v-model="data.form.reason" placeholder="请输入拒绝理由"></el-input>
+        </el-form-item>
+        <el-form-item prop="reason" label="专家建议" v-if="data.form.status === '审核通过'">
+          <el-input type="textarea" :rows="4" v-model="data.form.reason" placeholder="请输入专家建议"></el-input>
         </el-form-item>
       </el-form>
       <template #footer>

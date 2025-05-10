@@ -43,7 +43,7 @@
         </div>
         <div style="margin-left: 5px; flex: 1">
           <div style="font-size: 20px">用户人数</div>
-          <div style="font-size: 20px; font-weight: bold">{{ data.baseData.propagateNum }}</div>
+          <div style="font-size: 20px; font-weight: bold">{{ data.baseData.userNum }}</div>
         </div>
       </div>
     </div>
